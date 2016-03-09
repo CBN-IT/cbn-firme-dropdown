@@ -1,0 +1,82 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../cbn-select/cbn-select.html">
+
+<dom-module id="cbn-firme-dropdown">
+	<style>
+		#dropdownFirma {
+			--paper-input-container-input: {
+				color: white;
+			};
+			--cbn-select-ed-item:{
+				color: white;
+			};
+			--cbn-select-options-item:{
+				color: black;
+			};
+			--paper-input-container-underline: {
+				background: white;
+			};
+			--paper-input-container-underline-focus:{
+				background: white;
+			};
+		}
+
+		#dropdownFirma {
+			width: 300px;
+			margin-left: 13px;
+		}
+	</style>
+	<template>
+		<cbn-paper-select 
+			id="dropdownFirma"
+			item-value-property="_keyFirma" 
+			item-label-property="_numeFirma" 
+			filter-property="_numeFirma" 
+			options="{{conturi}}" 
+			value="{{namespace}}"
+			no-label-float
+		></cbn-paper-select>
+	</template>
+</dom-module>
+
+<script>
+	(function () {
+		Polymer({
+
+			is: 'cbn-firme-dropdown',
+			behaviors: [],
+			properties: {
+				conturi: {
+					type: Array,
+					value: function () {
+						return window.conturi;
+					}
+				},
+				namespace: {
+					type: String,
+					notify: true,
+					value: function () {
+						return namespace;
+					}
+				},
+				cont:{
+					notify: true
+				}
+			},
+			observers:[
+				"getCont(namespace)",
+				"getCont(conturi.splices)"
+			],
+			getCont: function () {
+				if (this.namespace == undefined || this.conturi == undefined) {
+					return;
+				}
+				this.conturi.forEach(function (c) {
+					if (c._keyFirma == this.namespace) {
+						this.cont = c;
+					}
+				}.bind(this));
+			}
+		})
+	})();
+</script>

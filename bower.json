@@ -1,6 +1,6 @@
 {
     "name": "cbn-firme-dropdown",
-    "version": "1.0",
+    "version": "1.0.0",
     "main": "cbn-firme-dropdown.html",
     "ignore": [
         "**/.*",

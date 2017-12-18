@@ -14,10 +14,10 @@
             }
             .firm-option{
                 --paper-item: {
-                    min-height:35px;
+                    min-height:30px;
                     border-top: 1px solid #cecece;
                     color: black;
-                    padding:0 10px;
+                    padding:0 15px;
                 }
             }
 
@@ -30,12 +30,24 @@
                 color: white;
                 background-color: var(--selected-menu-color);
             }
+            [slot="dropdown-trigger"]{
+                border-bottom: 1px solid white;
+                padding: 0;
+                border-radius: 0;
+                text-transform: none;
+            }
 
             paper-menu-button{
                 --paper-menu-button-dropdown:{
-                    /*margin-top:51px!important;*/
-                    min-width: 182px;
+                    min-width: 190px;
                 };
+            }
+
+            paper-menu-button>paper-listbox{
+                padding: 0;
+            }
+            .firm-name{
+                min-width: 150px;
             }
         </style>
         <paper-menu-button id="dropdownFirme" no-animations no-overlap>

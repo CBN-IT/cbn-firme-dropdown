@@ -1,0 +1,90 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+
+<dom-module id="cbn-firme-dropdown">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            .firm-option{
+                --paper-item: {
+                    min-height:35px;
+                    border-top: 1px solid #cecece;
+                    color: black;
+                    padding:0 10px;
+                }
+            }
+
+            .firm-option.iron-selected{
+                color: white;
+                background-color: var(--selected-menu-color);
+            }
+
+            .firm-option:hover{
+                color: white;
+                background-color: var(--selected-menu-color);
+            }
+
+            paper-menu-button{
+                --paper-menu-button-dropdown:{
+                    /*margin-top:51px!important;*/
+                    min-width: 182px;
+                };
+            }
+        </style>
+        <paper-menu-button id="dropdownFirme" no-animations no-overlap>
+            <paper-button slot="dropdown-trigger" class="horizontal layout center-justified">
+                <div class="firm-name">{{cont._numeFirma}}</div>
+                <iron-icon icon="arrow-drop-down"></iron-icon>
+            </paper-button>
+            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="[[namespace]]" selectable="none">
+                <template is="dom-repeat" items="{{conturi}}">
+                    <paper-item name="{{item._keyFirma}}" on-click="changedNamespace" class="firm-option">{{item._numeFirma}}</paper-item>
+                </template>
+            </paper-listbox>
+        </paper-menu-button>
+    </template>
+
+    <script>
+        /**
+         * `cbn-firme-dropdown`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class CbnFirmeDropdown extends Polymer.Element {
+            static get is() {
+                return 'cbn-firme-dropdown';
+            }
+
+            static get properties() {
+                return {
+                    conturi: {
+                        type: Array
+                    },
+                    namespace: {
+                        type: String
+                    },
+                    cont: {
+                        type: Object
+                    }
+                };
+            }
+            changedNamespace(event){
+                event.preventDefault();
+                event.stopPropagation();
+
+                if(event.model.item["_keyFirma"] != this.namespace){
+                    console.log("fereastra noua");
+                }
+                this.$.dropdownFirme.opened = false;
+            }
+        }
+
+        window.customElements.define(CbnFirmeDropdown.is, CbnFirmeDropdown);
+    </script>
+</dom-module>

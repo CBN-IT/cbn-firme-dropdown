@@ -100,6 +100,7 @@
                 event.stopPropagation();
 
                 if(event.model.item["_keyFirma"] != this.namespace){
+                    window.open(window.location.origin + "?namespace=" + event.model.item["_keyFirma"]);
                     console.log("fereastra noua");
                 }
                 this.$.dropdownFirme.opened = false;

@@ -1,14 +1,12 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/cbn-btn-styles/cbn-btn-styles.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
 <dom-module id="cbn-firme-dropdown">
     <template>
-        <style>
+        <style include="cbn-btn-styles">
             :host {
                 display: block;
             }
@@ -16,17 +14,13 @@
                 display: none;
             }
             .firm-option{
-                --paper-item: {
-                    min-height:30px;
-                    border-top: 1px solid #cecece;
-                    color: black;
-                    padding:0 15px;
-                }
-            }
-
-            .firm-option.iron-selected{
-                color: white;
-                background-color: var(--selected-menu-color);
+                min-height: 30px;
+                border-top: 1px solid #cecece;
+                color: black;
+                padding: 0 15px;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
             }
 
             .firm-option:hover{
@@ -34,11 +28,9 @@
                 color: white;
                 background-color: var(--selected-menu-color);
             }
-            [slot="dropdown-trigger"]{
+            .btn-trigger{
                 border-bottom: 1px solid white;
-                padding: 0;
-                border-radius: 0;
-                text-transform: none;
+                margin:0 6px;
             }
 
             paper-menu-button{
@@ -48,24 +40,21 @@
                     margin-top: var(--dropdown-margin-top)
                 };
             }
-
-            paper-menu-button>paper-listbox{
-                padding: 0;
-            }
             .firm-name{
                 min-width: 150px;
+                text-align: left;
             }
         </style>
         <paper-menu-button id="dropdownFirme" no-animations no-overlap>
-            <paper-button slot="dropdown-trigger" class="horizontal layout center-justified">
+            <button slot="dropdown-trigger" class="btn ripple btn-trigger">
                 <div class="firm-name">{{cont._numeFirma}}</div>
                 <iron-icon icon="arrow-drop-down"></iron-icon>
-            </paper-button>
-            <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="[[namespace]]" selectable="none">
+            </button>
+            <div slot="dropdown-content">
                 <template is="dom-repeat" items="{{conturi}}">
-                    <paper-item name="{{item._keyFirma}}" on-click="changedNamespace" class="firm-option">{{item._numeFirma}}</paper-item>
+                    <div name="{{item._keyFirma}}" on-click="changedNamespace" class="firm-option">{{item._numeFirma}}</div>
                 </template>
-            </paper-listbox>
+            </div>
         </paper-menu-button>
     </template>
 

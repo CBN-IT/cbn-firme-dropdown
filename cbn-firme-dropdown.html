@@ -29,6 +29,7 @@
                 background-color: var(--selected-menu-color);
             }
             .btn-trigger{
+                border-radius: 0;
                 border-bottom: 1px solid white;
             }
 
@@ -45,7 +46,7 @@
             }
         </style>
         <paper-menu-button id="dropdownFirme" no-animations no-overlap>
-            <button slot="dropdown-trigger" class="btn ripple btn-trigger">
+            <button slot="dropdown-trigger" class="icon-btn ripple btn-trigger">
                 <div class="firm-name">{{cont._numeFirma}}</div>
                 <iron-icon icon="arrow-drop-down"></iron-icon>
             </button>

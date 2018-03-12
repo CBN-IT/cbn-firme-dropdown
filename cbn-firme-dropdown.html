@@ -8,8 +8,10 @@
     <template>
         <style include="cbn-btn-styles">
             :host {
-                display: block;
                 @apply --paper-font-subhead;
+                /*@apply --layout-horizontal;*/
+                overflow: hidden;
+                display: flex;
             }
             :host([hidden]) {
                 display: none;
@@ -31,25 +33,35 @@
             .btn-trigger{
                 border-radius: 0;
                 border-bottom: 1px solid white;
+                overflow: hidden;
+                flex-shrink: unset;
             }
 
             paper-menu-button{
-                padding: 0 8px;
+                /*padding: 0 8px;*/
+                --paper-menu-button:{
+                    overflow: hidden;
+                };
                 --paper-menu-button-dropdown:{
                     min-width: 190px;
                     margin-top: var(--dropdown-margin-top)
                 };
             }
             .firm-name{
-                min-width: 150px;
+                min-width: 50px;
+                white-space: nowrap;
                 text-align: left;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
         </style>
         <paper-menu-button id="dropdownFirme" no-animations no-overlap>
-            <button slot="dropdown-trigger" class="icon-btn ripple btn-trigger">
+            <div slot="dropdown-trigger" style="overflow: auto;display: flex">
+                <button slot="dropdown-trigger" class="horizontal layout icon-btn ripple btn-trigger">
                 <div class="firm-name">{{cont._numeFirma}}</div>
                 <iron-icon icon="arrow-drop-down"></iron-icon>
             </button>
+            </div>
             <div slot="dropdown-content">
                 <template is="dom-repeat" items="{{conturi}}">
                     <div name="{{item._keyFirma}}" on-click="changedNamespace" class="firm-option">{{item._numeFirma}}</div>
@@ -89,8 +101,8 @@
                 event.preventDefault();
                 event.stopPropagation();
 
-                if(event.model.item["_keyFirma"] != this.namespace){
-                    window.open(window.location.origin + "?namespace=" + event.model.item["_keyFirma"]);
+                if(event.model.item["_keyFirma"] !== this.namespace){
+                    window.open(window.location.origin + window.location.pathname + "?namespace=" + event.model.item["_keyFirma"]);
                     console.log("fereastra noua");
                 }
                 this.$.dropdownFirme.opened = false;

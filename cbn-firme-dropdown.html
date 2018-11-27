@@ -62,7 +62,7 @@
             </button>
             </div>
             <div slot="dropdown-content">
-                <template is="dom-repeat" items="{{conturi}}">
+                <template is="dom-repeat" items="{{conturi}}" sort="sortFirme">
                     <div name="{{item._keyFirma}}" on-click="changedNamespace" class="firm-option">{{item._numeFirma}}</div>
                 </template>
             </div>
@@ -105,6 +105,15 @@
                     console.log("fereastra noua");
                 }
                 this.$.dropdownFirme.opened = false;
+            }
+            sortFirme(a,b){
+                if(a._numeFirma<b._numeFirma){
+                    return -1;
+                }
+                if(a._numeFirma>b._numeFirma){
+                    return 1;
+                }
+                return 0;
             }
         }
 
